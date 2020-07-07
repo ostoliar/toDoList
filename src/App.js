@@ -31,25 +31,47 @@ class App extends Component {
     // update state with new list and reset newItem input
     this.setState({
       list,
-      newItem:''
+      newItem:""
     });
+  }
+
+  deleteItem(id){
+    // copy current list of items
+    const list = [...this.state.list];
+
+    // filter out item being deleted
+    const updateList = list.filter(item => item.id !== id);
+
+    this.setState({list: updateList});
   }
 
   render() {
     return (
       <div className="App">
         <div>
+          <p>To Do List</p>
           Add an Item..
           <br />
           <input
             type="text"
             placeholder="type item here..."
             value={this.state.newItem}
-            onChange={(e) => this.updateInput("newItem", e.target.value)}
+            onChange={e => this.updateInput("newItem", e.target.value)}
           >
            
           </input>
           <button onClick={() => this.addItem()}>Add</button>
+          <br/>
+          <ul>
+            {this.state.list.map(item => {
+              return(
+                <li key={item.id}>
+                  {item.value}
+                  <button onClick={() => this.deleteItem(item.id)}>X</button>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       </div>
     );
