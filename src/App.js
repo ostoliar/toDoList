@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import classes from './ToDo.css';
 
 class App extends Component {
   constructor(props) {
@@ -48,26 +49,30 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <p>To Do List</p>
+        <div className="ToDo">
+          <p className="MyList">To Do List</p>
           Add an Item..
           <br />
+          <div>
           <input
+          className="input"
             type="text"
-            placeholder="type item here..."
+            placeholder="Type item here..."
             value={this.state.newItem}
             onChange={e => this.updateInput("newItem", e.target.value)}
           >
            
           </input>
-          <button onClick={() => this.addItem()}>Add</button>
+          <button className="button" onClick={() => this.addItem()}>Add</button>
+          </div>
+         
           <br/>
           <ul>
             {this.state.list.map(item => {
               return(
-                <li key={item.id}>
+                <li className="list" key={item.id}>
                   {item.value}
-                  <button onClick={() => this.deleteItem(item.id)}>X</button>
+                  <button className="closeBtn" onClick={() => this.deleteItem(item.id)}>X</button>
                 </li>
               )
             })}
